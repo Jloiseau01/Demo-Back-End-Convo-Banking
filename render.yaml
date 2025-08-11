@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: convo-bank-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: |
+      npm ci
+      npm run prisma:generate || true
+      npm run build
+    startCommand: node dist/main.js
+    runtime: node
+    repo: https://github.com/your-username/your-backend-repo
+    branch: main
+    healthCheckPath: /ai/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: FINXACT_API_URL
+        value: https://sandbox-api.finxact.com
+      - key: FINXACT_CLIENT_ID
+        sync: false
+      - key: FINXACT_CLIENT_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+    autoDeploy: true
+databases:
+  - name: convo-bank-postgres
+    plan: free
+    region: oregon
