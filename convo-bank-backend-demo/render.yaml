@@ -10,7 +10,6 @@ services:
       npm run build
     startCommand: node dist/main.js
     runtime: node
-    repo: https://github.com/your-username/your-backend-repo
     healthCheckPath: /ai/health
     envVars:
       - key: NODE_ENV
